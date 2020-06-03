@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="mylib_root_menu" name="Thư viện của tôi" sequence="1"/>
+            <menuitem id="mylib_book_menu" name="Sách" parent="mylib_root_menu"
+                      action="mylib_book_act" sequence="1"/>
+            <menuitem id="mylib_author_menu" name="Tác giả" parent="mylib_root_menu"
+                      action="mylib_author_act" sequence="5"/>
+            <menuitem id="mylib_category_menu" name="Danh mục sách" parent="mylib_root_menu"
+                      action="mylib_category_act" sequence="10"/>
+            <menuitem id="mylib_bookloan_menu" name="Mượn sách" parent="mylib_root_menu"
+                      action="mylib_bookloan_act" sequence="15"/>
+            <menuitem id="mylib_emplyees_menu" name="Nhân viên" parent="mylib_root_menu"
+                      action="mylib_emplyees_act" sequence="20"/>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="mylib_author_act" model="ir.actions.act_window">
+           <field name="name">Tác giả</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">mylib.author</field>
+           <field name="view_mode">tree,form</field>
+           <field name="help" type="html">
+             <p class="oe_view_nocontent_create">
+                Thêm mới một tác giả ở đây
+             </p><p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+             </p>
+           </field>
+       </record>
+        <record id="mylib_author_tree" model="ir.ui.view">
+            <field name="name">Tác giả</field>
+            <field name="model">mylib.author</field>
+            <field name="arch" type="xml">
+                <tree string="Tác giả">
+                    <field name="name"/>
+                    <field name="image"/>
+                    <field name="nation"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record id="mylib_author_form" model="ir.ui.view">
+            <field name="name">Tác giả</field>
+            <field name="model">mylib.author</field>
+            <field name="arch" type="xml">
+                <form string="Tác giả">
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar" width="100" height="200" margin-right="60"/>
+                        <div class="oe_title">
+<!--                            <label for="name"></label>-->
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Thông tin">
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                                <group>
+                                    <field name="nation" widget="many2one_tags"/>
+                                    <field name="description"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

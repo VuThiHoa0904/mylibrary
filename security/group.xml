@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mylib_group" model="ir.module.category">
+            <field name="name">Nhóm quyền trong thư viện</field>
+            <field name="sequence" eval="1"/>
+        </record>
+        <record id="mylib_manager" model="res.groups">
+            <field name="name">Quản lí thư viện</field>
+            <field name="category_id" ref="mylib_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="mylib_employees" model="res.groups">
+            <field name="name">Nhân viên thư viện</field>
+            <field name="category_id" ref="mylib_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

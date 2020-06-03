@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mylib_bookloan_tree" model="ir.ui.view">
+            <field name="name">Mượn sách</field>
+            <field name="model">mylib.bookloan</field>
+            <field name="arch" type="xml">
+                <tree string="Phiếu mượn">
+                    <field name="code"/>
+                    <field name="user"/>
+                    <field name="date"/>
+                    <field name="date_return"/>
+                    <field name="bookloan_detail"/>
+                    <field name="is_archived"/>
+<!--                    Để phân quyền theo file ta thêm thuộc tính group trong field đó, trong đó groups="<tên module>.<id của group>" khi đó field đó chỉ được hiển thị trong nhóm quyền được khai báo trong group-->
+                    <field name="create_uid" groups="mylibrary.mylib_manager"/>
+                </tree>
+            </field>
+        </record>
+        <record id="mylib_bookloan_form" model="ir.ui.view">
+            <field name="name">Mượn sách</field>
+            <field name="model">mylib.bookloan</field>
+            <field name="arch" type="xml">
+                <form string="Phiếu mượn">
+                    <header>
+                        <button name="action_confirm" string="Confirm" class="oe_highlight" states="draft" type="object"/>
+                        <button name="action_done" string="Done" class="oe_highlight" states="confirm" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" statusbar_colors="{'KEY_IS_STATE':'VALUE_IS_COLOR'}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                            <field name="user"/>
+                            <field name="date"/>
+                            <field name="date_return"/>
+                            <field name="is_archived"/>
+                            <field name="create_uid" groups="mylibrary.mylib_manager"/>
+                        </group>
+                        <group>
+                            <field name="bookloan_detail" col="6">
+                                <tree editable="bottom">
+<!--                                    <field name="bookloan"/>-->
+                                    <field name="book_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="mylib_bookloan_act" model="ir.actions.act_window">
+            <field name="name">Mượn sách</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mylib.bookloan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mylib_book_act" model="ir.actions.act_window">
+            <field name="name">Sách</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mylib.book</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context">{"search_default_Con": 1}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Tạo sách đầu tiên của bạn!
+              </p>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </field>
+        </record>
+
+        <record id="mylib_book_kanban" model="ir.ui.view">
+             <field name="name">Sách</field>
+             <field name="model">mylib.book</field>
+             <field name="arch" type="xml">
+                 <kanban>
+                     <field name="id" />
+                     <field name="code"/>
+                     <field name="name"/>
+                     <field name="image"/>
+                     <field name="category_id"/>
+                     <field name="author"/>
+                     <field name="amount"/>
+                     <templates>
+                         <t t-name="kanban-box">
+<!--                             thẻ để có thể click vào-->
+                             <div class="oe_kanban_global_click">
+<!--                                 t-att-src: là 1 thẻ javascript trong odoo để hiện ảnh khi click vào. Tham số là tên model, thuộc tính cần dùng-->
+                                 <img t-att-src="kanban_image('mylib.book', 'image', record.id.value)"
+                                      t-att-title="record.id.value" width="64" height="64" class="o_kanban_image pull-left" alt="Image"/>
+                                 <div class="oe_kanban_detail">
+                                     <strong><field name="name"/></strong><br/>
+                                     Mã sách: <field name="code"/><br/>
+                                     Số lượng: <field name="amount"/>
+                                 </div>
+                             </div>
+                         </t>
+                     </templates>
+                 </kanban>
+             </field>
+        </record>
+        <record id="mylib_book_tree" model="ir.ui.view">
+            <field name="name">Sách</field>
+            <field name="model">mylib.book</field>
+            <field name="arch" type="xml">
+                <tree string="Sách">
+                    <field name="code"/>
+                    <field name="name_seq"/>
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="category_id"/>
+                    <field name="author"/>
+                    <field name="state"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record id="open_bookloan_book" model="ir.actions.act_window">
+            <field name="name">Bookloan</field>
+            <field name="res_model">mylib.bookloan_detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('book_id', '=', active_id)]</field>
+            <field name="context">{}</field>
+        </record>
+        <record id="mylib_book_form" model="ir.ui.view">
+            <field name="name">Sách</field>
+            <field name="model">mylib.book</field>
+            <field name="arch" type="xml">
+                <form string="Sách">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_bookloan_book" type="object" class="oe_stat_button" icon="fa-book" >
+                                <field name="bookloan_count" widget="statinfo" string="Bookloan"/>
+                            </button>
+                            <button name="%(open_bookloan_book)d" type="action" class="oe_stat_button" icon="fa-usd" >
+                                <field name="bookloan_count" widget="statinfo" string="Bookloan"/>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar" width="80" height="200" margin-right="50"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" palaceholder="Tên sách"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Thông tin sách">
+                                <group>
+                                    <group>
+                                        <field name="code"/>
+                                        <field name="year"/>
+                                        <field name="category_id" widget="many2one_tags"/>
+                                        <field name="author" widget="many2many_tags"/>
+                                    </group>
+                                    <group>
+                                        <field name="price"/>
+                                        <field name="cost"/>
+                                        <field name="state"/>
+                                        <field name="amount"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Mô tả sách">
+                                <group>
+                                    <field name="description"/>
+                                    <field name="htm"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="mylib_book_search" model="ir.ui.view">
+           <field name="name">mylib.book.search</field>
+           <field name="model">mylib.book</field>
+            <field name="arch" type="xml">
+                <search string="Book Information">
+                  <field name="name" domain="[()]"/>
+                  <field name="name_seq"/>
+                  <field name="code" />
+                    <separator/>
+                  <filter name="Con" domain="[('state','=','con')]" string="Còn sách" help="Lọc trạng thái sách"/>
+                  <filter name="Het" domain="[('state','=','het')]" string="Hết sách" help="Lọc trạng thái sách"/>
+                  <filter name="SapHet" domain="[('state','=','saphet')]" string="Sắp hết sách" help="Lọc trạng thái sách"/>
+                  <group expand="0" string="Group By" colspan="12" col="10">
+                        <filter name="category" context="{'group_by': 'category_id'}" string="Danh mục sách"/>
+                        <filter name="year" context="{'group_by': 'year'}" string="Năm xuất bản"/>
+                  </group>
+                </search>
+           </field>
+        </record>
+    </data>
+</odoo>

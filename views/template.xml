@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="list" >-->
+<!--        <t t-call="website.layout">-->
+<!--            <t t-call="report.internal_layout">-->
+<!--            &lt;!&ndash; <t t-call="report.external_layout"> &ndash;&gt;-->
+<!--                <div class="page">-->
+<!--                    <h2>TITLE FOR YOUR REPORT</h2>-->
+<!--                    &lt;!&ndash;-->
+<!--                    Build your report here!-->
+<!--                    Do it in awesome way ;)-->
+<!--                    &ndash;&gt;-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
+
+<!--    <template id="list">-->
+<!--            <title>Danh sách Sách</title>-->
+<!--            <t t-foreach="books" t-as="book">-->
+<!--                <p><t t-esc="book.id"/> <t t-esc="book.name"/></p>-->
+<!--            </t>-->
+<!--        </template>-->
+
+        <template id="list">
+            <t t-call="website.layout">
+                <t t-set="title">Danh sách Sách</t>
+                <div class="oe_structure">
+                    <div class="container">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Id</th>
+                              <th scope="col">Tên sách</th>
+                              <th scope="col">Số lượng</th>
+                              <th scope="col">Năm xuất bản</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <t t-foreach="books" t-as="book">
+                                <tr>
+                                  <td><t t-esc="book.id"/></td>
+                                  <td>
+                                      <p>
+                                          <a t-attf-href="/mylibrary/{{ slug(book) }}">
+                                            <t t-esc="book.name"/>
+                                          </a>
+                                      </p>
+                                  </td>
+                                  <td><t t-esc="book.amount"/></td>
+                                  <td><t t-esc="book.year"/></td>
+                                </tr>
+                              </t>
+                          </tbody>
+                        </table>
+
+
+<!--                            <p><t t-esc="book.id"/> <t t-esc="book.name"/></p>-->
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="list1">
+                <t t-call="website.layout">
+                    <t t-set="title">Chi tiết sách</t>
+                    <div class="oe_structure"/>
+                    <div class="oe_structure">
+                        <div class="container">
+                            <p>Id sách:  <t t-esc="Book.id"/></p>
+                            <p>Tên sách: <t t-esc="Book.name"/></p>
+                            <p>Năm xuất bản: <t t-esc="Book.year"/></p>
+                            <p t-field="Book.htm"/>
+                        </div>
+                    </div>
+                    <div class="oe_structure"/>
+                </t>
+        </template>
+
+</odoo>

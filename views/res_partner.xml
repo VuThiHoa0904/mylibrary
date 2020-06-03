@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="mylib_partner_inherit" model="ir.ui.view">
+            <field name="name">Đối tác</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='lang']" position="after">
+                    <!-- Add position: inside, before, after, replace -->
+                        <field name="isBlackList"/>
+                    </xpath>
+                    <xpath expr="//field[@name='vat']" position="replace">
+                        <field name="vat" invisible="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='function']" position="replace">
+                        <field name="function" invisible="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='type']" position="replace">
+                        <field name="type" invisible="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='category_id']" position="replace">
+                        <field name="category_id" invisible="1"/>
+                    </xpath>
+<!--                    <xpath expr="//field[@name='street']" position="before">-->
+<!--                        <field name="mobile" />-->
+<!--                    </xpath>-->
+<!--                    <xpath expr="//field[@name='mobile']" position="before">-->
+<!--                        <field name="email" />-->
+<!--                    </xpath>-->
+<!--                    <xpath expr="//field[@name='email']" position="after">-->
+<!--                        <field name="website" />-->
+<!--                    </xpath>-->
+                </data>
+
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
